@@ -1,0 +1,32 @@
+{
+  "name": "battleship-server",
+  "version": "1.0.0",
+  "description": "Battleship: The Game",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "rimraf ./build && nodemon -e js,ts,json ./node_modules/.bin/ts-node src/index.ts",
+    "build": "tsc",
+    "start": "ts-node src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "cors": "^2.8.5",
+    "express": "^4.15.4",
+    "lodash": "^4.17.15",
+    "mysql": "^2.14.1",
+    "reflect-metadata": "^0.1.10",
+    "typeorm": "0.2.22"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/node": "^8.0.29",
+    "nodemon": "^2.0.2",
+    "rimraf": "^3.0.0",
+    "ts-node": "3.3.0",
+    "typescript": "^3.7.5"
+  }
+}

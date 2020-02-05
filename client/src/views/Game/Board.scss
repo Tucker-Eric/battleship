@@ -1,0 +1,82 @@
+$background-color: #dcdcdc;
+$swimmer: '\01F3CA';
+$rowboat: '\01F6A3';
+$sailboat: '\026F5';
+$speedboat: '\01F6A4';
+$ship: '\01F6A2';
+
+$hit: '\02718';
+$miss: '\01F535';
+
+.cell {
+  border: 1px solid #afafaf;
+  text-align: center;
+  font-weight: bold;
+  &.hit:before {
+    color: red;
+    content: $hit;
+  }
+  &.guess:not(.hit):before {
+    color: blue;
+    content: $miss;
+  }
+
+  // To display our ships on opponents board
+  .my-board & {
+    height: 2rem;
+    width: 2rem;
+    font-size: 1.5rem;
+    background-color: $background-color;
+
+    &.ship:not(.hit) {
+      &.submarine:after {
+        color: orangered;
+        content: $swimmer;
+      }
+      &.destroyer:after {
+        color: blue;
+        content: $rowboat;
+      }
+      &.cruiser:after {
+        color: purple;
+        content: $sailboat;
+      }
+      &.battleship:after {
+        color: green;
+        content: $speedboat;
+      }
+      &.aircraft-carrier:after {
+        content: $ship;
+        color: brown;
+      }
+    }
+  }
+
+  // To display my guesses on my display
+  .game-board & {
+    font-size: 2.75rem;
+    background-color: $background-color;
+    height: 3.5rem;
+    width: 3.5rem;
+    transition: background-color 0.3s ease;
+
+    &:not(.guess):not(.hit) {
+      cursor: pointer;
+      &:hover {
+        background-color: darken($color: $background-color, $amount: 10);
+      }
+      &:active {
+        background-color: darken($color: $background-color, $amount: 20);
+      }
+    }
+
+    &.guess,
+    &.hit {
+      cursor: not-allowed;
+    }
+  }
+
+  .game-board.opponents-turn & {
+    cursor: not-allowed;
+  }
+}

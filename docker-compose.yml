@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  client:
+    init: true
+    restart: always
+    image: battleship-client
+    build: ./client
+    ports:
+      - ${NGINX_PORT:-3000}:80
+    networks:
+      - frontend
+    depends_on:
+      - server
+
+  server:
+    init: true
+    image: battleship-server
+    build: ./server
+    restart: always
+    environment:
+      DB_HOST: db
+      DB_USERNAME: root
+      DB_DATABASE: ${MYSQL_DATABASE:-battleship}
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      - db
+    networks:
+      - frontend
+      - backend
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-battleship}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    networks:
+      - backend
+
+networks:
+  backend:
+  frontend:

@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  client:
+    build:
+      target: BASE
+    command: [npm, run, start]
+    ports:
+      - 3000:3000
+    volumes:
+      - ./client:/app
+
+  server:
+    build:
+      target: BASE
+    command: [npm, run, dev]
+    ports:
+      - ${SERVER_PORT:-3001}:3000
+    volumes:
+      - ./server:/app
